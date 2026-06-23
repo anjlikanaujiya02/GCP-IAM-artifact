@@ -1,10 +1,15 @@
+provider "google" {
+  project = var.project_id
+  region  = var.region
+}
+
 module "artifact-registry-repository-iam-bindings" {
   source  = "terraform-google-modules/iam/google//modules/artifact_registry_iam"
   version = "~> 8.2"
 
-  project      = "terraform-iam-500306"
+  project      = var.project_id
   repositories = ["my-app"]
-  location     = "asia-south1"
+  location     = var.region
   mode         = "additive"
 
   bindings = {
